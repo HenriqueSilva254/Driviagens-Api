@@ -1,9 +1,13 @@
-import { cityRepositories } from "../repository/cityRepository";
+import { conflict } from "../errors/conflict.js";
+import { cityRepositories } from "../repository/cityRepository.js";
 
 async function Create(name){
     //chamar funcao de post 
     const checkCityExist = await cityRepositories.checkCity(name)
-    if(checkCityExist) console.log('erro')
+    
+    if(checkCityExist) {
+        
+        throw conflict(name)}
 
     return await cityRepositories.postCity(name)
 }

@@ -1,4 +1,4 @@
-import { db } from "../database/db";
+import { db } from "../database/db.js";
 
 async function checkCity(id){
     const check = await db.query(`SELECT * FROM cities WHERE id = $1`, [id])
