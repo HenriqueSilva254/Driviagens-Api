@@ -2,7 +2,7 @@ import { db } from "../database/db.js";
 
 async function checkCity(id){
     const check = await db.query(`SELECT * FROM cities WHERE id = $1`, [id])
-    return check.rows    
+    return check.rows[0]   
 }
 
 async function postFlights(origin, destination, date){

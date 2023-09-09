@@ -7,7 +7,7 @@ async function Create(name){
     
     if(checkCityExist) {
         
-        throw conflict(name)}
+        throw conflict('Cidade já existe')}
 
     return await cityRepositories.postCity(name)
 }
