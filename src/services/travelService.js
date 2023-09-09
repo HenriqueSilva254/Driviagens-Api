@@ -1,16 +1,16 @@
-import { conflict } from "../errors/conflict.js";
-import { passengersRepository } from "../repository/passengersRepository.js";
+import { notFound } from "../errors/notFound.js";
+import { travelsRepository } from "../repository/travelsRepository.js";
 
 
-async function Create(firstName, lastName){
-    //chamar funcao de post 
-    const checkCityExist = await passengersRepository.checkPassenger(firstName, lastName)
-    
-    if(checkCityExist) {
-        
-        throw conflict('Passageiro já existe')}
+async function Create(flightId, passengerId){
 
-    return await passengersRepository.postPassenger(firstName, lastName)
+    const checkFlight = await travelsRepository.checkFlight(flightId)
+    const checkPasseger = await travelsRepository.checkPasseger(passengerId)
+
+    if(!checkFlight) throw notFound('Voo não existe')
+    if(!checkPasseger) throw notFound('Passageiro não existe')
+
+    return await travelsRepository.posTravels(passengerId, flightId)
 }
 
 export const travelServices = {Create}
